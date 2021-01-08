@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './App.css';
+import { Button } from 'antd'
+import { PlusCircleFilled } from "@ant-design/icons"
 
 class App extends React.Component{
 
-  render(){
-  
+  render(){  
 
   return (
-   <div>
-     Hello
-   </div>
+    <Fragment>
+
+      <Button type="primary" 
+              icon={<PlusCircleFilled/>} 
+       >
+       Add Contact
+      </Button>
+    </Fragment> 
 
   )
 
-  }
-    
+  }    
   
 }
 
