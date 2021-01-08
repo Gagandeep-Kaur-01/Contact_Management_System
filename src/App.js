@@ -5,30 +5,37 @@ import { PlusCircleFilled } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
 
 function App() {
-    const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [values, setValues] = useState({});
+  const [errorInfo, setError] = useState("");
 
-    const showDrawer = () => {
-        setVisible(true);
-      }
-    
-      const onClose = () => {
-        setVisible(false);
-      };
-  
+  const handleAddFormOnFinish = (values) => {
+    setValues(values);
+  };
+
+  const handleAddFormOnFinishFailed = (errorInfo) => {
+    setError(errorInfo);
+  };
+
+  console.log("values : ", values);
+  console.log("errorInfo : ", errorInfo);
+
   return (
     <Fragment>
 
       <Button type="primary" 
-              icon={<PlusCircleFilled/>}
-              onClick={showDrawer} 
+              icon={<PlusCircleFilled/>} 
+              onClick={() => setVisible(true)}
       >
         Add Contact
       </Button>
 
       <AddDrawer
-        onClose={onClose}
-        visible={visible}
-      />
+        show={visible}
+        handleonClose={() => setVisible(false)}
+        handleOnFinish={handleAddFormOnFinish}
+        handleOnFinishFailed={handleAddFormOnFinishFailed}
+      />        
 
     </Fragment>   
     
