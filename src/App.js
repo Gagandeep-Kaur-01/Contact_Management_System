@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import './App.css';
-import { Button } from 'antd'
+import { Button, Drawer } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
+import AddDrawer from './Components/AddDrawer'
 
 class App extends React.Component{
   constructor(props){
@@ -23,22 +24,27 @@ class App extends React.Component{
     });
   };
 
-  render(){  
+  render(){
 
   return (
     <Fragment>
 
       <Button type="primary" 
               icon={<PlusCircleFilled/>} 
-       >
-       Add Contact
+              onClick={this.showDrawer}
+      >
+        Add Contact
       </Button>
-    </Fragment> 
 
-  )
+      <AddDrawer
+        onClose={this.onClose}
+        visible={this.state.visible}
+      />       
 
-  }    
-  
+    </Fragment>   
+    
+  );
+  }
 }
 
 export default App;
