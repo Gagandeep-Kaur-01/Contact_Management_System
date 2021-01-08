@@ -1,6 +1,7 @@
-import React  from 'react'
+import React, { useState } from 'react'
 import 'antd/dist/antd.css';
 import { Drawer } from "antd";
+import Form from "./Form"
 
 class AddDrawer extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class AddDrawer extends React.Component {
           visible={this.props.visible}
           maskClosable={true}
          >
+          <Form/>
         </Drawer>
       </div> 
     );  
