@@ -11,6 +11,18 @@ class App extends React.Component{
     };
   }
 
+  showDrawer = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+
   render(){  
 
   return (
