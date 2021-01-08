@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import './App.css';
 import { Button } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
+import AddDrawer from './Components/AddDrawer'
 
 function App() {
     const [visible, setVisible] = useState(false);
@@ -23,6 +24,11 @@ function App() {
       >
         Add Contact
       </Button>
+
+      <AddDrawer
+        onClose={onClose}
+        visible={visible}
+      />
 
     </Fragment>   
     
