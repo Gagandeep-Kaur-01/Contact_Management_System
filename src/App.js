@@ -1,12 +1,18 @@
 import React, { Fragment } from 'react'
 import './App.css';
+import { Button } from 'antd'
+import { PlusCircleFilled } from "@ant-design/icons"
 
 function App() {
   
   return (
     <Fragment>
 
-        <h2> Function component</h2>
+      <Button type="primary" 
+              icon={<PlusCircleFilled/>} 
+      >
+        Add Contact
+      </Button>
 
     </Fragment>   
     
