@@ -1,23 +1,50 @@
 import React, { useState } from 'react'
 import 'antd/dist/antd.css';
-import { Drawer } from "antd";
+import { Drawer, Form, Input, Button } from "antd";
 
 const AddDrawer = ({onClose, visible}) => {
     
     return (
-      <Drawer 
+        <Drawer 
         width="400"
         title="Add Contact"
-        placement="right"
-        closable={false}
+        placement="right"        
         onClose={onClose}
         visible={visible}
-        maskClosable={true}
        >
-        <h1>Content Here</h1>
-        <p>1)........</p>
-        <p>2)........</p>
-        <p>3)........</p>
+         <Form
+            name="basic"
+          >
+            <Form.Item
+              label="First Name"
+              name="firstName"
+              rules={[{ required: true, message: 'Please input your first name!' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Last Name"
+              name="lastName"
+              rules={[{ required: true, message: 'Please input your last name!' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Phone Number"
+              name="phoneNumber"
+              rules={[{ required: true, message: 'Please input your phone number!' }]}
+            >
+              <Input type="tel" />
+            </Form.Item>
+               
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Add
+              </Button>
+            </Form.Item>
+          </Form>
       </Drawer>
     );      
 };
