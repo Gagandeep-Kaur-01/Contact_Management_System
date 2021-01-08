@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import 'antd/dist/antd.css';
 import { Drawer } from "antd";
-import Form from "./Form"
+import Form from "./Form_class"
 
 class AddDrawer extends React.Component {
     constructor(props) {
