@@ -4,6 +4,12 @@ import { Button } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
 
 class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      visible: false,
+    };
+  }
 
   render(){  
 
