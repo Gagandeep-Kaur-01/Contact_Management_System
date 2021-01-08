@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import 'antd/dist/antd.css';
 import { Drawer, Form, Input, Button } from "antd";
 
-const AddDrawer = ({onClose, visible}) => {
-    
+const AddDrawer = ({show, handleonClose, handleOnFinish, handleOnFinishFailed}) => {
+    const initialValues = { firstName: "", lastName: "", phoneNumber: null }
     return (
-        <Drawer 
+      <Drawer 
         width="400"
         title="Add Contact"
         placement="right"        
-        onClose={onClose}
-        visible={visible}
+        onClose={handleonClose}
+        visible={show}
        >
          <Form
             name="basic"
+            initialValues={initialValues}
+            onFinish={handleOnFinish}
+            onFinishFailed={handleOnFinishFailed}
           >
             <Form.Item
               label="First Name"
@@ -48,5 +52,12 @@ const AddDrawer = ({onClose, visible}) => {
       </Drawer>
     );      
 };
+
+AddDrawer.propTypes = {
+    show:PropTypes.bool.isRequired,
+    handleOnClose: PropTypes.func.isRequired,
+    handleOnFinish: PropTypes.func.isRequired,
+    handleOnFinishFailed: PropTypes.func.isRequired
+}; 
 
 export default AddDrawer;
