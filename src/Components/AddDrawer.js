@@ -4,19 +4,19 @@ import 'antd/dist/antd.css';
 import { Drawer, Form, Input, Button } from "antd";
 
 const AddDrawer = ({
-  show,
+  show, 
   handleonClose, 
   handleOnFinish, 
   handleOnFinishFailed}) => {
-    const initialValues = { firstName: "", lastName: "", phoneNumber: null }
+    const initialValues = { firstName: "", lastName: "", phoneNumber: null };
     const [form] = Form.useForm();
     const [, forceUpdate] = useState({});
 
-// To disable submit button at the beginning.
+  // To disable submit button at the beginning.
   useEffect(() => {
     forceUpdate({});
   }, []);
-    
+  
     return (
       <Drawer 
         width="400"
@@ -57,7 +57,7 @@ const AddDrawer = ({
               <Input type="tel" />
             </Form.Item>
                
-            <Form.Item shouldUpdate >
+              <Form.Item shouldUpdate >
               {() => (
                 <Fragment>
                   <Button
@@ -71,9 +71,12 @@ const AddDrawer = ({
                    >
                     Add
                   </Button>
+                  <Button htmlType="submit" onClick= {() => form.resetFields()} >
+                    Reset
+                  </Button> 
                 </Fragment>
-              )}  
-            </Form.Item>
+              )}
+              </Form.Item>
           </Form>
       </Drawer>
     );      
