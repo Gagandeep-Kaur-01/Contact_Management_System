@@ -34,7 +34,7 @@ function App() {
 
   //console.log("values : ", values);
   //console.log("errorInfo : ", errorInfo);
-  
+
   /* manually added data into table.
   const dataSource = [
     {      
@@ -77,7 +77,7 @@ function App() {
       </Menu>
     </Sider>
     <Layout className="site-layout">
-      <Header className="site-layout-background" style={{ padding: 0 }} />
+       <Header style={{ background: "#fff", padding: 0 }} />
       <Content style={{ margin: '0 16px' }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
         <Fragment>
