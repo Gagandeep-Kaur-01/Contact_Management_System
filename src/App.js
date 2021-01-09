@@ -18,8 +18,18 @@ function App() {
     setError(errorInfo);
   };
 
-  console.log("values : ", values);
-  console.log("errorInfo : ", errorInfo);
+  //console.log("values : ", values);
+  //console.log("errorInfo : ", errorInfo);
+
+  const dataSource = [
+    {
+      // manually added data into table.
+      key: '1',
+      firstName: 'Mike',
+      lastName: 'lname',
+      phoneNumber: '1000875' 
+    },
+  ];
 
   const columns = [
     {
@@ -39,6 +49,8 @@ function App() {
     },
   ];
 
+  
+
   return (
     <Fragment>
 
@@ -50,7 +62,7 @@ function App() {
       </Button>
 
       <Layout.Content> 
-        <Table columns={columns} />;
+        <Table dataSource={dataSource} columns={columns} />;
       </Layout.Content>
 
       <AddDrawer
