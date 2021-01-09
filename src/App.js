@@ -82,15 +82,20 @@ function App() {
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
         <Fragment>
 
-          <Button type="primary" 
-            icon={<PlusCircleFilled/>} 
-            onClick={() => setVisible(true)}
-           >
-            Add Contact
-          </Button>
+          <div style={{ display: "flex", justifyContent:"space-between", marginBottom:20}}>
+            <div></div>
+              <div>
+                <Button type="primary" 
+                  icon={<PlusCircleFilled/>} 
+                  onClick={() => setVisible(true)}
+                 >
+                 Add Contact
+                </Button>
+              </div>
+            </div>
 
           <Layout.Content> 
-            <Table dataSource={values} columns={columns} />;
+            <Table dataSource={values} columns={columns} />
           </Layout.Content>
 
           <AddDrawer
