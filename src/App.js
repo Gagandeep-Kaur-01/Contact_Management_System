@@ -21,6 +21,24 @@ function App() {
   console.log("values : ", values);
   console.log("errorInfo : ", errorInfo);
 
+  const columns = [
+    {
+      title: 'First Name',
+      dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
+      key: 'lastName',
+    },
+    {
+      title: 'Phone Number',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+    },
+  ];
+
   return (
     <Fragment>
 
@@ -32,7 +50,7 @@ function App() {
       </Button>
 
       <Layout.Content> 
-        <Table />;
+        <Table columns={columns} />;
       </Layout.Content>
 
       <AddDrawer
