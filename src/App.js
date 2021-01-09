@@ -18,17 +18,15 @@ function App() {
     setError(errorInfo);
   };
 
-  //console.log("values : ", values);
-  //console.log("errorInfo : ", errorInfo);
 
   const dataSource = [
-    {
-      // manually added data into table.
+    /*{
+       manually added data into table.
       key: '1',
       firstName: 'Mike',
       lastName: 'lname',
       phoneNumber: '1000875' 
-    },
+    },*/
   ];
 
   const columns = [
@@ -62,7 +60,7 @@ function App() {
       </Button>
 
       <Layout.Content> 
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={values} columns={columns} />;
       </Layout.Content>
 
       <AddDrawer
