@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import './App.css';
-import { Button } from 'antd'
+import { Button, Layout, Table } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
 
@@ -9,8 +9,9 @@ function App() {
   const [values, setValues] = useState({});
   const [errorInfo, setError] = useState("");
 
-  const handleAddFormOnFinish = (values) => {
-    setValues(values);
+  const handleAddFormOnFinish = (data) => {
+    setValues([...values, data ]);
+    setVisible(false);
   };
 
   const handleAddFormOnFinishFailed = (errorInfo) => {
@@ -29,6 +30,10 @@ function App() {
       >
         Add Contact
       </Button>
+
+      <Layout.Content> 
+        <Table />;
+      </Layout.Content>
 
       <AddDrawer
         show={visible}
