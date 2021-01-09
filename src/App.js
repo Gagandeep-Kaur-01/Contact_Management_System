@@ -3,13 +3,14 @@ import './App.css';
 import { Button, Drawer, Layout, Table, Menu } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
+import { connect } from "react-redux";
+import { addContact } from './redux/contacts/actions';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
-function App() {
+const App = ({ contacts, addContact }) => {
   const [visible, setVisible] = useState(false);
-  const [values, setValues] = useState([]);
+  //const [values, setValues] = useState([]);
   const [errorInfo, setError] = useState({});
   const [collapsed, setCollapsed] = useState(false);
 
@@ -18,13 +19,10 @@ function App() {
   };
 
   const handleAddFormOnFinish = (data) => {
-    setValues([
-      ...values, 
-      {
-      key: values.length + 1,
-      ...data,
-      }, 
-    ]);
+    addContact({
+      key: contacts.length + 1,
+     ...data,
+    });
     setVisible(false);
   };
 
@@ -95,7 +93,7 @@ function App() {
             </div>
 
           <Layout.Content> 
-            <Table dataSource={values} columns={columns} />
+            <Table dataSource={contacts} columns={columns} />
           </Layout.Content>
 
           <AddDrawer
@@ -115,4 +113,18 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts && state.contacts.allContacts,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addContact:(contact) => {
+      dispatch(addContact(contact));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
