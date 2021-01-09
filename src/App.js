@@ -1,13 +1,21 @@
 import React, { Fragment, useState } from 'react'
 import './App.css';
-import { Button, Drawer, Layout, Table } from 'antd'
+import { Button, Drawer, Layout, Table, Menu } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
+
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 function App() {
   const [visible, setVisible] = useState(false);
   const [values, setValues] = useState([]);
   const [errorInfo, setError] = useState({});
+  const [collapsed, setCollapsed] = useState(false);
+
+  const onCollapse = (isCollapsed) => {
+    setCollapsed(isCollapsed);
+  };
 
   const handleAddFormOnFinish = (data) => {
     setValues([
@@ -15,9 +23,6 @@ function App() {
       {
       key: values.length + 1,
       ...data,
-      /*firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNumber: data.phoneNumber*/
       }, 
     ]);
     setVisible(false);
@@ -27,9 +32,9 @@ function App() {
     setError(errorInfo);
   };
 
-  /*console.log("values : ", values);
-  //console.log("errorInfo : ", errorInfo); */
-
+  //console.log("values : ", values);
+  //console.log("errorInfo : ", errorInfo);
+  
   /* manually added data into table.
   const dataSource = [
     {      
@@ -59,28 +64,49 @@ function App() {
   ];
 
   return (
-    <Fragment>
+    <Layout style={{ minHeight: '100vh' }}>
+    <Sider 
+      collapsible 
+      collapsed={collapsed} 
+      onCollapse={onCollapse}
+     >
 
-      <Button type="primary" 
-              icon={<PlusCircleFilled/>} 
-              onClick={() => setVisible(true)}
-      >
-        Add Contact
-      </Button>
+      <div className="logo" />
+      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        
+      </Menu>
+    </Sider>
+    <Layout className="site-layout">
+      <Header className="site-layout-background" style={{ padding: 0 }} />
+      <Content style={{ margin: '0 16px' }}>
+        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+        <Fragment>
 
-      <Layout.Content> 
-        <Table dataSource={values} columns={columns} />;
-      </Layout.Content>
+          <Button type="primary" 
+            icon={<PlusCircleFilled/>} 
+            onClick={() => setVisible(true)}
+           >
+            Add Contact
+          </Button>
 
-      <AddDrawer
-        show={visible}
-        handleonClose={() => setVisible(false)}
-        handleOnFinish={handleAddFormOnFinish}
-        handleOnFinishFailed={handleAddFormOnFinishFailed}
-      />        
+          <Layout.Content> 
+            <Table dataSource={values} columns={columns} />;
+          </Layout.Content>
 
-    </Fragment>   
-    
+          <AddDrawer
+            show={visible}
+            handleonClose={() => setVisible(false)}
+            handleOnFinish={handleAddFormOnFinish}
+            handleOnFinishFailed={handleAddFormOnFinishFailed}
+          />   
+
+        </Fragment>   
+        </div>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    </Layout>
+  </Layout>
+  
   );
 }
 
