@@ -1,16 +1,25 @@
 import React, { Fragment, useState } from 'react'
 import './App.css';
-import { Button, Layout, Table } from 'antd'
+import { Button, Drawer, Layout, Table } from 'antd'
 import { PlusCircleFilled } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
 
 function App() {
   const [visible, setVisible] = useState(false);
-  const [values, setValues] = useState({});
-  const [errorInfo, setError] = useState("");
+  const [values, setValues] = useState([]);
+  const [errorInfo, setError] = useState({});
 
   const handleAddFormOnFinish = (data) => {
-    setValues([...values, data ]);
+    setValues([
+      ...values, 
+      {
+      key: values.length + 1,
+      ...data,
+      /*firstName: data.firstName,
+      lastName: data.lastName,
+      phoneNumber: data.phoneNumber*/
+      }, 
+    ]);
     setVisible(false);
   };
 
@@ -18,17 +27,19 @@ function App() {
     setError(errorInfo);
   };
 
+  /*console.log("values : ", values);
+  //console.log("errorInfo : ", errorInfo); */
 
+  /* manually added data into table.
   const dataSource = [
-    /*{
-       manually added data into table.
+    {      
       key: '1',
       firstName: 'Mike',
       lastName: 'lname',
       phoneNumber: '1000875' 
-    },*/
-  ];
-
+    },
+  ];*/
+  
   const columns = [
     {
       title: 'First Name',
@@ -46,8 +57,6 @@ function App() {
       key: 'phoneNumber',
     },
   ];
-
-  
 
   return (
     <Fragment>
