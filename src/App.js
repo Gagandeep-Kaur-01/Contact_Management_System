@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import './App.css';
 import { Button, Drawer, Layout, Table, Menu } from 'antd'
-import { PlusCircleFilled } from "@ant-design/icons"
+import { PlusCircleFilled, DeleteOutlined } from "@ant-design/icons"
 import AddDrawer from './Components/AddDrawer'
 import { connect } from "react-redux";
-import { addContact } from './redux/contacts/actions';
+import { addContact, deleteContact } from './redux/contacts/actions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -59,6 +59,17 @@ const App = ({ contacts, addContact }) => {
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
     },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <Button 
+            onClick={()=>deleteContact(record.key)} 
+            icon={<DeleteOutlined/>} />
+        </span>
+      ),
+    }
   ];
 
   return (
