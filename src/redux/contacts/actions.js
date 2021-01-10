@@ -1,4 +1,4 @@
-import { ADD_CONTACT } from "./actionTypes"
+import { ADD_CONTACT, DELETE_CONTACT } from "./actionTypes"
 
 export const addContact = (contact) => {
     return (dispatch) => {
