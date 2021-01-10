@@ -8,3 +8,12 @@ export const addContact = (contact) => {
         });
     };
 };
+
+export const deleteContact = (key) => {
+    return (dispatch) => {
+        dispatch ({
+            type: DELETE_CONTACT,
+            payload: key,
+        });
+    };
+};
