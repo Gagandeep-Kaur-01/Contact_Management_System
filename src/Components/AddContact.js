@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Drawer } from "antd";
 import AddForm from './Form'
 
-const AddDrawer = ({ show, handleonClose, handleOnFinish, handleOnFinishFailed}) => {
+const AddContact = ({ show, handleonClose, handleOnFinish, handleOnFinishFailed}) => {
   
     return (
       <Drawer 
@@ -21,11 +21,11 @@ const AddDrawer = ({ show, handleonClose, handleOnFinish, handleOnFinishFailed})
     );      
 };
 
-AddDrawer.propTypes = {
+AddContact.propTypes = {
     show:PropTypes.bool.isRequired,
     handleOnClose: PropTypes.func.isRequired,
     handleOnFinish: PropTypes.func.isRequired,
     handleOnFinishFailed: PropTypes.func.isRequired
 }; 
 
-export default AddDrawer;
+export default AddContact;
