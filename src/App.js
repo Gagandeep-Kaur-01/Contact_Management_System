@@ -8,7 +8,7 @@ import { addContact, deleteContact } from './redux/contacts/actions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const App = ({ contacts, addContact }) => {
+const App = ({ contacts, addContact, deleteContact }) => {
   const [visible, setVisible] = useState(false);
   //const [values, setValues] = useState([]);
   const [errorInfo, setError] = useState({});
@@ -134,6 +134,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addContact:(contact) => {
       dispatch(addContact(contact));
+    },
+    deleteContact:(key) => {
+      dispatch(deleteContact(key));
     },
   };
 };
