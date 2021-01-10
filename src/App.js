@@ -66,7 +66,8 @@ const App = ({ contacts, addContact, deleteContact }) => {
         <span>
           <Button 
             onClick={()=>deleteContact(record.key)} 
-            icon={<DeleteOutlined/>} />
+            icon={<DeleteOutlined/>} 
+            type="link"/>
         </span>
       ),
     }
