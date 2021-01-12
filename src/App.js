@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import './App.css';
 import { Button, Drawer, Layout, Table, Menu } from 'antd'
 import { PlusCircleFilled, DeleteOutlined } from "@ant-design/icons"
-import AddContact from './Components/AddContact'
+import AddEditContact from './Components/AddEditContact'
 import { connect } from "react-redux";
 import { addContact, deleteContact } from './redux/contacts/actions';
 
@@ -108,7 +108,7 @@ const App = ({ contacts, addContact, deleteContact }) => {
             <Table dataSource={contacts} columns={columns} />
           </Layout.Content>
 
-          <AddContact
+          <AddEditContact
             show={visible}
             handleonClose={() => setVisible(false)}
             handleOnFinish={handleAddFormOnFinish}
