@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import './App.css';
 import { Button, Drawer, Layout, Table, Menu } from 'antd'
-import { PlusCircleFilled, DeleteOutlined } from "@ant-design/icons"
+import { PlusCircleFilled, DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AddEditContact from './Components/AddEditContact'
 import { connect } from "react-redux";
 import { addContact, deleteContact } from './redux/contacts/actions';
@@ -64,10 +64,15 @@ const App = ({ contacts, addContact, deleteContact }) => {
       key: 'action',
       render: (text, record) => (
         <span>
+          {/* Delete Contact button */} 
           <Button 
             onClick={()=>deleteContact(record.key)} 
             icon={<DeleteOutlined/>} 
             type="link"/>
+            {/* Edit Contact button */}  
+          <Button 
+            style={{ marginLeft: 10}}            
+            icon={<EditOutlined/>} />  
         </span>
       ),
     }
