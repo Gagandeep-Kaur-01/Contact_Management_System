@@ -1,4 +1,4 @@
-import { ADD_CONTACT, DELETE_CONTACT } from "./actionTypes";
+import { ADD_CONTACT, DELETE_CONTACT, EDIT_CONTACT } from "./actionTypes";
 const initialState = {
     allContacts: [],
 };
