@@ -2,9 +2,9 @@ import React, { useState, Fragment } from 'react';
 import { Form, Input, Button } from 'antd';
 
 
-function Forms({ onFinish, onFinishFailed }) {
+function Forms({ onFinish, onFinishFailed, initialValues, mode }) {
     
-  const initialValues = { firstName: "", lastName: "", phoneNumber: null };
+  //const initialValues = {  }; 
   const [form] = Form.useForm(); 
   const [, forceUpdate] = useState({});
     
@@ -16,6 +16,7 @@ function Forms({ onFinish, onFinishFailed }) {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         layout="vertical"
+        destroyOnClose={true} 
        >
         <Form.Item
           label="First Name"
@@ -53,8 +54,11 @@ function Forms({ onFinish, onFinishFailed }) {
                   !!form.getFieldsError().filter(({ errors }) => errors.length).length
                 }
                >
-                Add
+                {mode === "edit" ? "Edit" : "Add"}
               </Button>
+              {
+
+              }
               <Button htmlType="submit" onClick= {() => form.resetFields()} >
                 Reset
               </Button> 

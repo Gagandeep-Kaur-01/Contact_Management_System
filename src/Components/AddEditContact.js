@@ -4,28 +4,42 @@ import 'antd/dist/antd.css';
 import { Drawer } from "antd";
 import AddForm from './Form'
 
-const AddContact = ({ show, handleonClose, handleOnFinish, handleOnFinishFailed}) => {
+const AddEditContact = ({ 
+  show, 
+  handleonClose, 
+  handleOnFinish, 
+  handleOnFinishFailed, 
+  initialValues,
+  mode,
+  handleEditOnFinish
+}) => { 
   
     return (
       <Drawer 
         width="400"
-        title="Add Contact"
+        title={`${mode==='edit'? "Edit Contact" : "Add Contact"}`} 
         placement="right"        
         onClose={handleonClose}
         visible={show}
        >
          <AddForm 
-          onFinish={handleOnFinish}
-          onFinishFailed={handleOnFinishFailed}/>        
+          onFinish={mode==='edit'? handleEditOnFinish : handleOnFinish}
+          onFinishFailed={handleOnFinishFailed}
+          initialValues={initialValues}  
+          mode={mode} 
+          />        
       </Drawer>
     );      
 };
 
-AddContact.propTypes = {
+AddEditContact.propTypes = {
     show:PropTypes.bool.isRequired,
     handleOnClose: PropTypes.func.isRequired,
     handleOnFinish: PropTypes.func.isRequired,
-    handleOnFinishFailed: PropTypes.func.isRequired
+    handleOnFinishFailed: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,  
+    mode: PropTypes.oneOf(['add', 'edit']), 
+    handleEditOnFinish: PropTypes.func.isRequired,
 }; 
 
-export default AddContact;
+export default AddEditContact;

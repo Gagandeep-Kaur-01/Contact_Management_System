@@ -4,21 +4,27 @@ import { Button, Drawer, Layout, Table, Menu } from 'antd'
 import { PlusCircleFilled, DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import AddEditContact from './Components/AddEditContact'
 import { connect } from "react-redux";
-import { addContact, deleteContact } from './redux/contacts/actions';
+import { addContact, deleteContact, editContact } from './redux/contacts/actions';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const App = ({ contacts, addContact, deleteContact }) => {
+const App = ({ contacts, addContact, deleteContact, editContact }) => {
   const [visible, setVisible] = useState(false);
-  //const [values, setValues] = useState([]);
   const [errorInfo, setError] = useState({});
   const [collapsed, setCollapsed] = useState(false);
+  const [contact, setContact] = useState({  // for edit contact
+    firstName: "", 
+    lastName: "", 
+    phoneNumber: null
+  }); 
+  const [mode, setMode] = useState("add");  //....
+  const [key, setEditKey] = useState(); //  
 
   const onCollapse = (isCollapsed) => {
     setCollapsed(isCollapsed);
   };
 
-  const handleAddFormOnFinish = (data) => {
+  const handleAddFormOnFinish = (data) => {  
     addContact({
       key: contacts.length + 1,
      ...data,
@@ -26,8 +32,31 @@ const App = ({ contacts, addContact, deleteContact }) => {
     setVisible(false);
   };
 
+  //edit form
+  const handleEditFormOnFinish = (data) => {  
+    //console.log(data)
+    editContact({key, ...data});
+    setVisible(false);
+  };
+  
   const handleAddFormOnFinishFailed = (errorInfo) => {
     setError(errorInfo);
+  };
+
+  //.......
+  const handleonClose = () => {
+    setContact({firstName: "", lastName: "", phoneNumber: null});
+    setMode('add')
+    setEditKey();
+    setVisible(false);    
+  }
+
+  // for editing the contacts
+  const openEditDrawer = (contact, key) => {
+    setContact(contact);
+    setEditKey(key)
+    setVisible(true);
+    setMode('edit')
   };
 
   //console.log("values : ", values);
@@ -42,7 +71,7 @@ const App = ({ contacts, addContact, deleteContact }) => {
       phoneNumber: '1000875' 
     },
   ];*/
-  
+
   const columns = [
     {
       title: 'First Name',
@@ -62,16 +91,16 @@ const App = ({ contacts, addContact, deleteContact }) => {
     {
       title: 'Action',
       key: 'action',
-      render: (text, record) => (
+      render: (text, contact) => (
         <span>
           {/* Delete Contact button */} 
           <Button 
-            onClick={()=>deleteContact(record.key)} 
-            icon={<DeleteOutlined/>} 
-            type="link"/>
-            {/* Edit Contact button */}  
+            onClick={()=>deleteContact(contact.key)} 
+            icon={<DeleteOutlined/>} />
+          {/* Edit Contact button */}  
           <Button 
-            style={{ marginLeft: 10}}            
+            style={{ marginLeft: 10}}
+            onClick={()=>openEditDrawer(contact, contact.key)} 
             icon={<EditOutlined/>} />  
         </span>
       ),
@@ -80,25 +109,21 @@ const App = ({ contacts, addContact, deleteContact }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-    <Sider 
-      collapsible 
-      collapsed={collapsed} 
-      onCollapse={onCollapse}
-     >
+      <Sider 
+        collapsible 
+        collapsed={collapsed} 
+        onCollapse={onCollapse}
+       >
+       <div className="logo" />      
+      </Sider>
+      <Layout className="site-layout">
+        <Header style={{ background: "#fff", padding: 0 }} />
+        <Content style={{ margin: '0 16px' }}>
+          <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+          <Fragment>
 
-      <div className="logo" />
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        
-      </Menu>
-    </Sider>
-    <Layout className="site-layout">
-       <Header style={{ background: "#fff", padding: 0 }} />
-      <Content style={{ margin: '0 16px' }}>
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-        <Fragment>
-
-          <div style={{ display: "flex", justifyContent:"space-between", marginBottom:20}}>
-            <div></div>
+            <div style={{ display: "flex", justifyContent:"space-between", marginBottom:20}}>
+              <div></div>
               <div>
                 <Button type="primary" 
                   icon={<PlusCircleFilled/>} 
@@ -109,27 +134,29 @@ const App = ({ contacts, addContact, deleteContact }) => {
               </div>
             </div>
 
-          <Layout.Content> 
-            <Table dataSource={contacts} columns={columns} />
-          </Layout.Content>
+            <Layout.Content> 
+              <Table dataSource={contacts} columns={columns} />
+            </Layout.Content>
+            {visible && (
+              <AddEditContact //for edit
+                show={visible}
+                handleonClose={handleonClose} //
+                handleOnFinish={handleAddFormOnFinish}
+                handleOnFinishFailed={handleAddFormOnFinishFailed}
+                initialValues={contact} //
+                mode={mode}
+                handleEditOnFinish={handleEditFormOnFinish}
+              />  
+            )}   
 
-          <AddEditContact
-            show={visible}
-            handleonClose={() => setVisible(false)}
-            handleOnFinish={handleAddFormOnFinish}
-            handleOnFinishFailed={handleAddFormOnFinishFailed}
-          />   
-
-        </Fragment>   
-        </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Contact Management System</Footer>
+          </Fragment>   
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>Contact Management</Footer>
+      </Layout>
     </Layout>
-  </Layout>
-  
   );
 }
-
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts && state.contacts.allContacts,
@@ -144,7 +171,9 @@ const mapDispatchToProps = (dispatch) => {
     deleteContact:(key) => {
       dispatch(deleteContact(key));
     },
+    editContact:(contact) => {
+      dispatch(editContact(contact));
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
